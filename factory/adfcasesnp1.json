@@ -1,0 +1,9 @@
+{
+	"name": "adfcasesnp1",
+	"location": "centralus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "52af4100-8824-4c5e-ad8a-b3c9b592010e",
+		"tenantId": "76a2ae5a-9f00-4f6b-95ed-5d33d77c4d61"
+	}
+}
