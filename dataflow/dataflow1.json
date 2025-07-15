@@ -15,21 +15,25 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "AzureSqlTable1",
+						"referenceName": "AzureSqlTable6",
 						"type": "DatasetReference"
 					},
 					"name": "ValidSinkOutput"
 				},
 				{
-					"name": "sink1"
+					"dataset": {
+						"referenceName": "AzureSqlTable7",
+						"type": "DatasetReference"
+					},
+					"name": "InvalidSinkOutput"
 				}
 			],
 			"transformations": [
 				{
-					"name": "split1"
+					"name": "derivedColumn1"
 				},
 				{
-					"name": "derivedColumn1"
+					"name": "split1"
 				}
 			],
 			"scriptLines": [
@@ -44,18 +48,18 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> SourceBlobStream",
-				"SourceBlobStream split(Units > 0 && toDecimal(Unit_price) >= 0.0 && toDecimal(Sale_amt) >= 0.0 &&!isNull(SalesMan) &&!isNull(SalesDate) &&!isNull(Item),",
+				"SourceBlobStream derive(validstream = iif(Units <= 0, 'Invalid Units',   iif(Unit_price < 0, 'Negative Price',     iif(isNull(SalesMan), 'Missing SalesMan',       iif(isNull(SalesDate), 'Missing SalesDate',         iif(isNull(Item), 'Missing Item', 'Unknown Error')))))) ~> derivedColumn1",
+				"derivedColumn1 split(Units > 0 && toDecimal(Unit_price) >= 0.0 && toDecimal(Sale_amt) >= 0.0 &&!isNull(SalesMan) &&!isNull(SalesDate) &&!isNull(Item)  ,",
 				"     disjoint: false) ~> split1@(ValidStream, InvalidStream)",
-				"split1@ValidStream derive(ValidSalesExp = iif(Units <= 0, 'Invalid Units',   iif(Unit_price < 0, 'Negative Price',     iif(isNull(SalesMan), 'Missing SalesMan',       iif(isNull(SalesDate), 'Missing SalesDate',         iif(isNull(Item), 'Missing Item', 'Unknown Error')))))) ~> derivedColumn1",
-				"derivedColumn1 sink(allowSchemaDrift: true,",
+				"split1@ValidStream sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
-				"          EmployeeID as integer,",
-				"          EmployeeName as string,",
-				"          Gender as string,",
-				"          Location as string,",
-				"          Designation as string,",
-				"          Salary as decimal(10,2)",
+				"          SalesDate as date,",
+				"          SalesMan as string,",
+				"          Item as string,",
+				"          Units as integer,",
+				"          Unit_price as decimal(10,2),",
+				"          Sale_amt as decimal(10,2)",
 				"     ),",
 				"     deletable:false,",
 				"     insertable:true,",
@@ -65,11 +69,24 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError') ~> ValidSinkOutput",
-				"derivedColumn1 sink(allowSchemaDrift: true,",
+				"split1@InvalidStream sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     input(",
+				"          SalesDate as date,",
+				"          SalesMan as string,",
+				"          Item as string,",
+				"          Units as integer,",
+				"          Unit_price as decimal(10,2),",
+				"          Sale_amt as decimal(10,2)",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     format: 'table') ~> sink1"
+				"     errorHandlingOption: 'stopOnFirstError') ~> InvalidSinkOutput"
 			]
 		}
 	}
