@@ -1,0 +1,9 @@
+{
+	"name": "snpdatafactory12",
+	"location": "centralus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "a96c7138-ba00-412d-91d2-b72086159932",
+		"tenantId": "76a2ae5a-9f00-4f6b-95ed-5d33d77c4d61"
+	}
+}
