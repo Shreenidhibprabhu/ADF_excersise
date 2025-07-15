@@ -5,10 +5,6 @@
 		"typeProperties": {
 			"sources": [
 				{
-					"dataset": {
-						"referenceName": "DelimitedText1",
-						"type": "DatasetReference"
-					},
 					"name": "SourceBlobStream"
 				}
 			],
@@ -46,10 +42,9 @@
 				"          Sale_amt as double '000,000,000.000'",
 				"     ),",
 				"     allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> SourceBlobStream",
+				"     validateSchema: false) ~> SourceBlobStream",
 				"SourceBlobStream derive(validstream = iif(Units <= 0, 'Invalid Units',   iif(Unit_price < 0, 'Negative Price',     iif(isNull(SalesMan), 'Missing SalesMan',       iif(isNull(SalesDate), 'Missing SalesDate',         iif(isNull(Item), 'Missing Item', 'Unknown Error')))))) ~> derivedColumn1",
-				"derivedColumn1 split(Units > 0 && toDecimal(Unit_price) >= 0.0 && toDecimal(Sale_amt) >= 0.0 &&!isNull(SalesMan) &&!isNull(SalesDate) &&!isNull(Item)  ,",
+				"derivedColumn1 split(Units > 0 && toDecimal(Unit_price) >= 0.0 && toDecimal(Sale_amt) >= 0.0 &&!isNull(SalesMan) &&!isNull(SalesDate) &&!isNull(Item),",
 				"     disjoint: false) ~> split1@(ValidStream, InvalidStream)",
 				"split1@ValidStream sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
