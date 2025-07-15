@@ -21,10 +21,6 @@
 					"name": "ValidSinkOutput"
 				},
 				{
-					"dataset": {
-						"referenceName": "AzureSqlTable2",
-						"type": "DatasetReference"
-					},
 					"name": "sink1"
 				}
 			],
@@ -54,12 +50,12 @@
 				"derivedColumn1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
-				"          SalesDate as date,",
-				"          SalesMan as string,",
-				"          Item as string,",
-				"          Units as integer,",
-				"          Unit_price as decimal(10,2),",
-				"          Sale_amt as decimal(10,2)",
+				"          EmployeeID as integer,",
+				"          EmployeeName as string,",
+				"          Gender as string,",
+				"          Location as string,",
+				"          Designation as string,",
+				"          Salary as decimal(10,2)",
 				"     ),",
 				"     deletable:false,",
 				"     insertable:true,",
@@ -71,22 +67,9 @@
 				"     errorHandlingOption: 'stopOnFirstError') ~> ValidSinkOutput",
 				"derivedColumn1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     input(",
-				"          SalesDate as date,",
-				"          SalesMan as string,",
-				"          Item as string,",
-				"          Units as integer,",
-				"          Unit_price as decimal(10,2),",
-				"          Sale_amt as decimal(10,2)",
-				"     ),",
-				"     deletable:false,",
-				"     insertable:true,",
-				"     updateable:false,",
-				"     upsertable:false,",
-				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
+				"     format: 'table') ~> sink1"
 			]
 		}
 	}
