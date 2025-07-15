@@ -10,6 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
+				"fileName": "Sales.csv",
 				"container": "input"
 			},
 			"columnDelimiter": ",",
@@ -19,63 +20,27 @@
 		},
 		"schema": [
 			{
-				"name": "ID",
+				"name": "SalesDate",
 				"type": "String"
 			},
 			{
-				"name": "Name",
+				"name": "SalesMan",
 				"type": "String"
 			},
 			{
-				"name": "Gender",
+				"name": "Item",
 				"type": "String"
 			},
 			{
-				"name": "Age",
+				"name": "Units",
 				"type": "String"
 			},
 			{
-				"name": "Height (cm)",
+				"name": "Unit_price",
 				"type": "String"
 			},
 			{
-				"name": "Weight (kg)",
-				"type": "String"
-			},
-			{
-				"name": "Team",
-				"type": "String"
-			},
-			{
-				"name": "NOC",
-				"type": "String"
-			},
-			{
-				"name": "Games",
-				"type": "String"
-			},
-			{
-				"name": "Year",
-				"type": "String"
-			},
-			{
-				"name": "Season",
-				"type": "String"
-			},
-			{
-				"name": "City",
-				"type": "String"
-			},
-			{
-				"name": "Sport",
-				"type": "String"
-			},
-			{
-				"name": "Event",
-				"type": "String"
-			},
-			{
-				"name": "Medal",
+				"name": "Sale_amt",
 				"type": "String"
 			}
 		]
