@@ -9,30 +9,28 @@
 		"type": "AzureSqlTable",
 		"schema": [
 			{
-				"name": "SalesDate",
-				"type": "date"
-			},
-			{
-				"name": "SalesMan",
-				"type": "varchar"
-			},
-			{
-				"name": "Item",
-				"type": "varchar"
-			},
-			{
-				"name": "Units",
+				"name": "EmployeeID",
 				"type": "int",
 				"precision": 10
 			},
 			{
-				"name": "Unit_price",
-				"type": "decimal",
-				"precision": 10,
-				"scale": 2
+				"name": "EmployeeName",
+				"type": "varchar"
 			},
 			{
-				"name": "Sale_amt",
+				"name": "Gender",
+				"type": "varchar"
+			},
+			{
+				"name": "Location",
+				"type": "varchar"
+			},
+			{
+				"name": "Designation",
+				"type": "varchar"
+			},
+			{
+				"name": "Salary",
 				"type": "decimal",
 				"precision": 10,
 				"scale": 2
@@ -40,7 +38,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "ValidSales"
+			"table": "Employee_Details"
 		}
 	}
 }
