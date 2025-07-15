@@ -1,0 +1,9 @@
+{
+	"name": "datafactorysnp20",
+	"location": "centralus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "0f2f6f3f-5643-4204-bf17-5113b3453a7d",
+		"tenantId": "76a2ae5a-9f00-4f6b-95ed-5d33d77c4d61"
+	}
+}
