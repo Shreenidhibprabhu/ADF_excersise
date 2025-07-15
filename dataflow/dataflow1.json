@@ -5,20 +5,24 @@
 		"typeProperties": {
 			"sources": [
 				{
+					"dataset": {
+						"referenceName": "DelimitedText9",
+						"type": "DatasetReference"
+					},
 					"name": "SourceBlobStream"
 				}
 			],
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "AzureSqlTable6",
+						"referenceName": "AzureSqlTable8",
 						"type": "DatasetReference"
 					},
 					"name": "ValidSinkOutput"
 				},
 				{
 					"dataset": {
-						"referenceName": "AzureSqlTable7",
+						"referenceName": "AzureSqlTable9",
 						"type": "DatasetReference"
 					},
 					"name": "InvalidSinkOutput"
@@ -42,7 +46,8 @@
 				"          Sale_amt as double '000,000,000.000'",
 				"     ),",
 				"     allowSchemaDrift: true,",
-				"     validateSchema: false) ~> SourceBlobStream",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> SourceBlobStream",
 				"SourceBlobStream derive(validstream = iif(Units <= 0, 'Invalid Units',   iif(Unit_price < 0, 'Negative Price',     iif(isNull(SalesMan), 'Missing SalesMan',       iif(isNull(SalesDate), 'Missing SalesDate',         iif(isNull(Item), 'Missing Item', 'Unknown Error')))))) ~> derivedColumn1",
 				"derivedColumn1 split(Units > 0 && toDecimal(Unit_price) >= 0.0 && toDecimal(Sale_amt) >= 0.0 &&!isNull(SalesMan) &&!isNull(SalesDate) &&!isNull(Item),",
 				"     disjoint: false) ~> split1@(ValidStream, InvalidStream)",
