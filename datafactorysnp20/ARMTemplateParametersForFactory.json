@@ -20,6 +20,12 @@
 		"AzureSqlDatabase2_password": {
 			"value": ""
 		},
+		"AzureBlobStorage3_connectionString": {
+			"value": ""
+		},
+		"AzureDataLakeStorage2_accountKey": {
+			"value": ""
+		},
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"value": "https://snppstorageacc17.dfs.core.windows.net/"
 		},
@@ -40,6 +46,9 @@
 		},
 		"AzureSqlDatabase2_properties_typeProperties_userName": {
 			"value": "serveradmin17"
+		},
+		"AzureDataLakeStorage2_properties_typeProperties_url": {
+			"value": "https://storagesnpp20.dfs.core.windows.net/"
 		}
 	}
 }
