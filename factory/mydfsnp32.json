@@ -1,0 +1,9 @@
+{
+	"name": "mydfsnp32",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "76137a71-c997-4ae6-9bb8-4555a07ba6ed",
+		"tenantId": "76a2ae5a-9f00-4f6b-95ed-5d33d77c4d61"
+	}
+}
