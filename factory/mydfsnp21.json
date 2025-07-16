@@ -1,0 +1,9 @@
+{
+	"name": "mydfsnp21",
+	"location": "centralus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "5fffc925-8dd8-4def-9f2d-9e211b55d47f",
+		"tenantId": "76a2ae5a-9f00-4f6b-95ed-5d33d77c4d61"
+	}
+}
